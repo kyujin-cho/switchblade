@@ -1,5 +1,6 @@
 const { APIWrapper } = require('../')
 const fetch = require('node-fetch')
+const HttpsProxyAgent = require('https-proxy-agent')
 
 const TOKEN_URL = 'https://accounts.spotify.com/api/token'
 const API_URL = 'https://api.spotify.com/v1'
@@ -73,7 +74,8 @@ module.exports = class SpotifyAPI extends APIWrapper {
     if (this.isTokenExpired) await this.getToken()
     const qParams = new URLSearchParams(queryParams)
     return fetch(API_URL + endpoint + `?${qParams.toString()}`, {
-      headers: this.tokenHeaders
+      headers: this.tokenHeaders,
+      agent: (process.env.BLADE_PROXY ? new HttpsProxyAgent(process.env.BLADE_PROXY) : undefined)
     }).then(res => res.json())
   }
 

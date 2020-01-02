@@ -1,5 +1,6 @@
 const { APIWrapper } = require('../')
 const fetch = require('node-fetch')
+const HttpsProxyAgent = require('https-proxy-agent')
 
 const API_URL = 'https://api.tumblr.com/v2'
 
@@ -23,7 +24,9 @@ module.exports = class TumblrAPI extends APIWrapper {
   request (endpoint, queryParams = {}) {
     queryParams.api_key = process.env.TUMBLR_API_KEY
     const qParams = new URLSearchParams(queryParams)
-    return fetch(API_URL + endpoint + `?${qParams.toString()}`)
+    return fetch(API_URL + endpoint + `?${qParams.toString()}`, {
+      agent: (process.env.BLADE_PROXY ? new HttpsProxyAgent(process.env.BLADE_PROXY) : undefined)
+    })
       .then(res => res.json())
   }
 }

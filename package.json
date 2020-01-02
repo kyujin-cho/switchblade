@@ -16,11 +16,11 @@
     ]
   },
   "engines": {
-    "node": "10.12.0"
+    "node": "13.3.0"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/SwitchbladeBot/switchblade.git"
+    "url": "git+ssh://git@github.com/kyujin-cho/switchblade.git"
   },
   "keywords": [
     "discord"
@@ -28,9 +28,9 @@
   "author": "Switchblade Team",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/SwitchbladeBot/switchblade/issues"
+    "url": "https://github.com/kyujin-cho/switchblade/issues"
   },
-  "homepage": "https://github.com/SwitchbladeBot/switchblade#readme",
+  "homepage": "https://github.com/kyujin-cho/switchblade#readme",
   "dependencies": {
     "@hapi/joi": "^16.1.7",
     "abort-controller": "^2.0.3",
@@ -50,6 +50,7 @@
     "fuse.js": "^3.4.5",
     "gifencoder": "^2.0.1",
     "googleapis": "^39.1.0",
+    "https-proxy-agent": "^4.0.0",
     "i18n-iso-countries": "^3.7.8",
     "i18next": "^15.0.7",
     "i18next-node-fs-backend": "^2.1.3",

@@ -1,5 +1,6 @@
 const { APIWrapper } = require('../')
 const fetch = require('node-fetch')
+const HttpsProxyAgent = require('https-proxy-agent')
 const crypto = require('crypto')
 
 const API_URL = 'http://ws.audioscrobbler.com/2.0/'
@@ -121,7 +122,8 @@ module.exports = class LastFM extends APIWrapper {
     if (!write) return fetch(API_URL + `?${qParams.toString()}`).then(res => res.json())
     return fetch(API_URL + `?${qParams.toString()}`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      agent: (process.env.BLADE_PROXY ? new HttpsProxyAgent(process.env.BLADE_PROXY) : undefined)
     }).then(res => res.json())
   }
 
